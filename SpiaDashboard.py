@@ -7,25 +7,48 @@ import json
 import time
 import re
 import os
-from dotenv import load_dotenv
+from dotenv import load_dotenv, find_dotenv
+
+# --- BLOCO DE CARREGAMENTO REFORÇADO ---
+# 1. Tenta carregar normalmente
+load_dotenv()
+
+# 2. Se não achar, procura o arquivo .env explicitamente
+if not os.getenv("GITHUB_TOKEN"):
+    print("⚠️ Load padrão falhou. Tentando encontrar .env...")
+    env_path = find_dotenv()
+    if env_path:
+        print(f"✅ .env encontrado em: {env_path}")
+        load_dotenv(env_path, override=True)
+    else:
+        print("❌ Arquivo .env não encontrado pelo find_dotenv()")
+
+# 3. Debug no Terminal (Para você ver o que está acontecendo)
+print(f"--- DEBUG STREAMLIT ---")
+print(f"GITHUB_TOKEN: {os.getenv('GITHUB_TOKEN')}")
+print(f"EVO_APIKEY: {os.getenv('EVO_APIKEY')}")
+print(f"-----------------------")
+# ---------------------------------------
+
 from datetime import datetime
 from azure.ai.inference import ChatCompletionsClient
 from azure.ai.inference.models import SystemMessage, UserMessage
 from azure.core.credentials import AzureKeyCredential
 
 # ==========================================
-# 1. CONFIGURAÇÕES (HARDCODED / FIXAS)
+# 1. CONFIGURAÇÕES (SEGURAS)
 # ==========================================
 
 GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
 ENDPOINT_AI = os.getenv("ENDPOINT_AI")
 EVO_URL_TEXT = os.getenv("EVO_URL_TEXT")
 EVO_APIKEY = os.getenv("EVO_APIKEY")
-NUMERO_PADRAO = os.getenv("NUMERO_PADRAO", "") # Se não tiver, fica vazio
+NUMERO_PADRAO = os.getenv("NUMERO_PADRAO")
 
 # Validação de Segurança
 if not GITHUB_TOKEN or not EVO_APIKEY:
-    st.error("⚠️ ERRO DE CONFIGURAÇÃO: Chaves de API não encontradas. Configure as Variáveis de Ambiente na Coolify ou no arquivo .env.")
+    st.error(f"⚠️ ERRO DE CONFIGURAÇÃO! O Streamlit não leu as chaves.")
+    st.info("Verifique no terminal (tela preta) se as chaves apareceram no DEBUG.")
     st.stop()
 
 # ==========================================
