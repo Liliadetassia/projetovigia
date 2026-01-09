@@ -1,4 +1,5 @@
 import streamlit as st
+import streamlit.components.v1 as components # <--- IMPORTANTE: Adicionei esta linha aqui para erros de tradução!
 import cv2
 import base64
 import requests
@@ -8,6 +9,40 @@ import time
 import re
 import os
 from dotenv import load_dotenv, find_dotenv
+
+# --- BLOCO PARA EVITAR TRADUÇÃO AUTOMÁTICA PELO GOOGLE ---
+
+st.set_page_config(page_title="SPIA Dashboard", page_icon="🛡️", layout="wide")
+
+# 1. Javascript para forçar o navegador a entender que é PT-BR
+components.html("""
+    <script>
+        document.documentElement.setAttribute('lang', 'pt-BR');
+        var banner = document.querySelector('.goog-te-banner-frame');
+        if(banner) { banner.style.display = 'none'; }
+    </script>
+""", height=0)
+
+# 2. CSS e Meta Tags para bloquear a tradução do Google
+st.markdown("""
+    <meta name="google" content="notranslate">
+    <style>
+        /* Protege o corpo do site contra tradução */
+        body {
+            -webkit-translate: no;
+            translate: no;
+        }
+        /* Esconde a barra do Google Tradutor */
+        .goog-te-banner-frame {
+            display: none !important;
+        }
+        /* Classe padrão do Google para não traduzir */
+        .notranslate {
+            -webkit-translate: no;
+        }
+    </style>
+""", unsafe_allow_html=True)
+# ---------------------------------------------------
 
 # --- BLOCO DE CARREGAMENTO REFORÇADO ---
 # 1. Tenta carregar normalmente
