@@ -62,3 +62,7 @@ Resultado Esperado: A IA deve identificar "Indivíduo caído" ou "Postura de col
 
 Por que isso é tecnicamente relevante?
 Este código demonstra a capacidade de Interpretação Semântica de Cenas. Enquanto sistemas antigos apenas detectam "tem movimento", o meu sistema entende o que é o movimento (ex: alguém correndo vs. alguém caindo). 
+
+## Observação
+
+Neste projeto optei em usar a coolify somente porque tenho projetos meus rodando nele, mas se quiser pode optar em usar portainer ou outro de sua preferência. 
