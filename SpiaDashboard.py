@@ -161,6 +161,18 @@ def analisar_imagem_ai(imagem_bytes):
 
 st.set_page_config(page_title="SPIA Dashboard", page_icon="🛡️", layout="wide")
 
+# --- ADICIONE ESTE BLOCO ---
+# Vacina para evitar o erro 'removeChild' causado pelo Google Tradutor
+st.markdown("""
+    <meta name="google" content="notranslate">
+    <style>
+        /* Esconde a barra de tradução do Google se ela aparecer */
+        .goog-te-banner-frame {display: none !important;}
+        body {top: 0px !important;}
+    </style>
+    """, unsafe_allow_html=True)
+# ---------------------------
+
 st.title("🛡️ SPIA - Sistema de Policiamento por IA")
 st.markdown("**Obs:**")
 
