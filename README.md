@@ -8,11 +8,6 @@ O histórico de commits anteriores foi resetado para garantir a segurança de cr
 
 > **Projeto Vigia:** Monitoramento inteligente, análise de risco em tempo real e despacho automático de ocorrências via WhatsApp.
 
-Python
-Streamlit
-AI
-WhatsApp
-
 ## 📋 Sobre o Projeto
 
 O **SPIA** é uma Prova de Conceito (PoC) desenvolvida para modernizar a segurança pública. Diferente de câmeras tradicionais que apenas gravam, o SPIA atua como um **agente ativo**:
