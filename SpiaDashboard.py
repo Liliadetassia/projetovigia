@@ -17,9 +17,32 @@ st.set_page_config(page_title="SPIA Dashboard", page_icon="🛡️", layout="wid
 # 1. Javascript para forçar o navegador a entender que é PT-BR
 components.html("""
     <script>
-        document.documentElement.setAttribute('lang', 'pt-BR');
-        var banner = document.querySelector('.goog-te-banner-frame');
-        if(banner) { banner.style.display = 'none'; }
+        try {
+            // Acessa o documento principal (fora do iframe)
+            const mainDoc = window.parent.document;
+            
+            // 1. Força o idioma na tag HTML principal
+            mainDoc.documentElement.setAttribute('lang', 'pt-BR');
+            
+            // 2. Injeta a Meta Tag 'notranslate' no <head> do site principal
+            // Verifica se já existe para não duplicar
+            if (!mainDoc.querySelector('meta[name="google"][content="notranslate"]')) {
+                const meta = mainDoc.createElement('meta');
+                meta.name = 'google';
+                meta.content = 'notranslate';
+                mainDoc.head.appendChild(meta);
+            }
+            
+            // 3. Adiciona classe 'notranslate' ao corpo do site
+            mainDoc.body.classList.add('notranslate');
+            
+            // 4. Esconde banner do Google (se houver)
+            const banner = mainDoc.querySelector('.goog-te-banner-frame');
+            if(banner) { banner.style.display = 'none'; }
+            
+        } catch (e) {
+            console.log("Bloqueio de segurança do navegador impediu acesso ao parent: " + e);
+        }
     </script>
 """, height=0)
 
