@@ -1,5 +1,11 @@
 # 🛡️ SPIA - Sistema de Policiamento por Inteligência Artificial
 
+---
+## 🛡️ Nota de Segurança e Histórico
+
+Este repositório é uma versão pública (Public Release) do meu projeto originalmente desenvolvido em meu ambiente privado. 
+O histórico de commits anteriores foi resetado para garantir a segurança de credenciais sensíveis (Azure Keys, Evolution API Tokens) que foram migrados para Variáveis de Ambiente neste deploy, portanto este projeto não terá histórico dos commits, pretendo avançar nele e deixar algo mais robusto.
+
 > **Projeto Vigia:** Monitoramento inteligente, análise de risco em tempo real e despacho automático de ocorrências via WhatsApp.
 
 Python
